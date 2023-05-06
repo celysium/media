@@ -1,12 +1,12 @@
 <?php
 
-namespace Celysium\MediaLibrary;
+namespace Celysium\Media;
 
 use Exception;
 use Illuminate\Http\UploadedFile;
 use Celysium\Request\Facades\RequestBuilder;
 
-class MediaLibrary
+class Media
 {
     public function upload(UploadedFile $file): ?string
     {

@@ -1,11 +1,10 @@
 <?php
 
-namespace Celysium\MediaLibrary;
+namespace Celysium\Media;
 
 use Illuminate\Support\ServiceProvider;
 
-class
-MediaLibraryServiceProvider extends ServiceProvider
+class MediaServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -14,7 +13,7 @@ MediaLibraryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('media-library', function($app) {
-            return new MediaLibrary();
+            return new Media();
         });
     }
 }
