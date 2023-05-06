@@ -3,7 +3,7 @@
   "description": "A simple Media Library package.",
   "autoload": {
     "psr-4": {
-      "Celysium\\MediaLibrary\\": "src/"
+      "Celysium\\Media\\": "src/"
     }
   },
   "authors": [
@@ -24,10 +24,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Celysium\\MediaLibrary\\MediaLibraryServiceProvider"
+        "Celysium\\Media\\MediaServiceProvider"
       ],
       "aliases": {
-        "MediaLibrary": "Celysium\\MediaLibrary\\Facades\\MediaLibrary"
+        "Media": "Celysium\\Media\\Facades\\Media"
       }
     }
   },
