@@ -3,8 +3,8 @@
 namespace Celysium\Media;
 
 use Celysium\Request\Exceptions\BadRequestHttpException;
-use Illuminate\Http\UploadedFile;
 use Celysium\Request\Facades\RequestBuilder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\ValidationException;
 
 class Media
@@ -41,6 +41,33 @@ class Media
             ->post('internal/v1/media/files/url', [
                 'url' => $url
             ])
+            ->onError(fn($response) => throw new BadRequestHttpException($response))
+            ->json('data.path');
+    }
+
+    /**
+     * @param string $content
+     * @param string $extension
+     * @return string|null
+     * @throws BadRequestHttpException
+     * @throws ValidationException
+     */
+    public function uploadByContent(string $content, string $extension): ?string
+    {
+        if (empty($extension)) {
+            throw ValidationException::withMessages(['extension' => ['extension is required.']]);
+        }
+
+        if (empty($content)) {
+            throw ValidationException::withMessages(['content' => ['content is required.']]);
+        }
+
+        if ($extension == 'json' && empty(json_decode($content))) {
+            throw ValidationException::withMessages(['content' => ['content is invalid.']]);
+        }
+
+        return RequestBuilder::request()
+            ->post('internal/v1/media/files/content', compact('content', 'extension'))
             ->onError(fn($response) => throw new BadRequestHttpException($response))
             ->json('data.path');
     }

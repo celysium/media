@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static upload(UploadedFile $file): ?string
  * @method static uploadByUrl(string $url): ?string
+ * @method static uploadByContent(string $content, string $extension): ?string
  */
 class Media extends Facade
 {
